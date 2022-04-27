@@ -1,1 +1,4 @@
-document.querySelector("p").style.color = "red";
+$(document).ready(function () {
+
+
+});
