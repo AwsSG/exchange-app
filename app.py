@@ -1,5 +1,9 @@
 import os
 from flask import Flask, render_template
+import requests
+import random
+import time
+import threading
 if os.path.exists("env.py"):
     import env
 
@@ -7,27 +11,37 @@ if os.path.exists("env.py"):
 app = Flask(__name__)
 
 
-import requests
 
 # Where USD is the base currency you want to use
 url = 'http://api.exchangeratesapi.io/v1/latest?access_key=1896b2be48dacf88b405e92f6d2136fe&symbols=USD,TRY'
 
 # Making our request
-response = requests.get(url)
-data = response.json()
+# response = requests.get(url)
+# data = response.json()
 
 # Your JSON object
-print(data)
+# print(data)
 
-USD=data["rates"]["USD"]
-TRY=data["rates"]["TRY"]
-print(USD)
-print(TRY)
+# USD=data["rates"]["USD"]
+# TRY=data["rates"]["TRY"]
+# print(USD)
+# print(TRY)
+random_list = []
+
+def random_number():
+    """ dummy function to generate random numbers """
+    rndm = random.randint(0, 100)
+    random_list.append(rndm)
+    return random_list
+
 
 @app.route("/")
 def home():
     """ the main view of the app """
-    return render_template("main.html")
+    threading.Timer(10, random_number())
+    total_sum = sum(random_list)
+
+    return render_template("main.html", random_list=random_list, total_sum=total_sum)
 
 
 if __name__ == "__main__":

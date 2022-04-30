@@ -1,13 +1,36 @@
 {% extends "base.html" %}
+{% block meta %}
+<meta http-equiv="refresh" content="10">
+{% endblock %}
+
 {% block content %}
 
 <div class="container">
     <div class="row">
         <div class="col">
             <div class="border mt-4 p-5 rounded">
+                <h3>{{ total_sum }}</h3>
                 <p>currency pair: &euro;/&#36;</p>
-                <p id="eur"></p>
-                <p id="usd"></p>
+                <div class="panel-body table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>USD</th>
+                                <th>TRY</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in random_list %}
+                            <tr>
+                                <td>{{ item }}</td>
+                                <td>{{ item }} &#36;</td>
+                                <td>{{ item }} &#8378;</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
